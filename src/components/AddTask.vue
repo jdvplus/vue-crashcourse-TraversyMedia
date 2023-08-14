@@ -1,5 +1,5 @@
 <template>
-  <form @submit="onSubmit" class="add-form">
+  <form @submit.prevent="onSubmit" class="add-form">
     <div class="form-control">
       <label>Task</label>
       <input
@@ -26,40 +26,37 @@
   </form>
 </template>
 
-<script>
-export default {
-  name: 'AddTask',
-  data() {
-    return {
-      text: '',
-      day: '',
-      reminder: false,
-    };
-  },
-  methods: {
-    onSubmit(e) {
-      e.preventDefault();
+<script setup>
+import { ref } from 'vue';
 
-      if (!this.text) {
-        alert('Please add a task');
-        return;
-      }
+// emits
+const emit = defineEmits(['add-task']);
 
-      const newTask = {
-        // id: Math.floor(Math.random() * 100000),
-        text: this.text,
-        day: this.day,
-        reminder: this.reminder,
-      };
-      // console.log('new task', newTask);
+// data
+const text = ref('');
+const day = ref('');
+const reminder = ref(false);
 
-      this.$emit('add-task', newTask);
+// methods
+const onSubmit = (e) => {
+  if (!text.value) {
+    alert('Please add a task');
+    return;
+  }
 
-      this.text = '';
-      this.day = '';
-      this.reminder = false;
-    },
-  },
+  const newTask = {
+    // id: Math.floor(Math.random() * 100000),
+    text: text.value,
+    day: day.value,
+    reminder: reminder.value,
+  };
+  // console.log('new task', newTask);
+
+  emit('add-task', newTask);
+
+  text.value = '';
+  day.value = '';
+  reminder.value = false;
 };
 </script>
 

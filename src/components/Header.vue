@@ -8,30 +8,26 @@
       :color="showAddTask ? 'mediumaquamarine' : 'dodgerblue'"
       fontColor="black"
     />
-    <!-- <Button text="Update task" color="blue" /> -->
-    <!-- <Button text="Delete task" color="red" /> -->
   </header>
 </template>
 
-<script>
+<script setup>
 import Button from './Button.vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-export default {
-  name: 'Header',
-  props: {
-    title: String,
-    showAddTask: Boolean,
-  },
-  components: {
-    Button,
-  },
-  computed: {
-    homePage() {
-      if (this.$route.path === '/') return true;
-      else return false;
-    },
-  },
-};
+// props
+defineProps({
+  title: String,
+  showAddTask: Boolean,
+});
+
+// computed
+const homePage = computed(() => {
+  const route = useRoute();
+  if (route.path === '/') return true;
+  else return false;
+});
 </script>
 
 <style scoped>

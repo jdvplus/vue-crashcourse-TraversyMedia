@@ -8,17 +8,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Task from './Task.vue';
 
-export default {
-  name: 'Tasks',
-  props: {
-    tasks: Array,
-  },
-  components: {
-    Task,
-  },
-  emits: ['delete-task', 'toggle-reminder'],
-};
+// props
+defineProps({ tasks: Array });
+
+// emits
+const emit = defineEmits(['delete-task', 'toggle-reminder']);
 </script>

@@ -8,19 +8,19 @@
   </button>
 </template>
 
-<script>
-export default {
-  name: 'Button',
-  props: {
-    text: String,
-    color: String,
-    fontColor: String,
-  },
-  methods: {
-    onClick() {
-      // console.log('clicked');
-      this.$emit('btn-click');
-    },
-  },
+<script setup>
+// props
+defineProps({
+  text: String,
+  color: String,
+  fontColor: String,
+});
+
+// emits
+const emit = defineEmits(['btn-click']);
+
+// methods
+const onClick = (e) => {
+  emit('btn-click');
 };
 </script>

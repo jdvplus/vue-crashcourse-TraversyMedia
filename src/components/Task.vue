@@ -12,13 +12,9 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Task',
-  props: {
-    task: Object,
-  },
-};
+<script setup>
+// props
+defineProps({ task: Object });
 </script>
 
 <style scoped>
